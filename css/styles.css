@@ -1,0 +1,22 @@
+:root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --primary: #22c55e;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --danger: #ef4444;
+    --radius: 12px;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: .75rem 1rem;
+    cursor: pointer;
+}
