@@ -1,3 +1,7 @@
+import {  renderMeals,  } from "./meals.js";
+import { loadSettings } from "./settings.js";
+import { exportData, importData } from "./storage.js";
+
 document.addEventListener(
     "DOMContentLoaded",
     () => {

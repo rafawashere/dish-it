@@ -1,4 +1,4 @@
-const STORAGE_KEY = "dishit";
+const STORAGE_KEY = "dish_it";
 
 const DEFAULT_DATA = {
     settings: {
@@ -9,11 +9,11 @@ const DEFAULT_DATA = {
     meals: []
 };
 
-export const loadData = () =>
+const loadData = () =>
     JSON.parse(localStorage.getItem(STORAGE_KEY))
     ?? structuredClone(DEFAULT_DATA);
 
-export const saveData = data =>
+const saveData = data =>
     localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(data)
@@ -33,7 +33,7 @@ const exportData = () => {
     const link = document.createElement("a");
 
     link.href = url;
-    link.download = "dishit.json";
+    link.download = `${STORAGE_KEY}.json`;
     link.click();
 
     URL.revokeObjectURL(url);
@@ -54,3 +54,5 @@ const importData = (file) => {
 
     reader.readAsText(file);
 };
+
+export { exportData, importData, saveData, loadData };

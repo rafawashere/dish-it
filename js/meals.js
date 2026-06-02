@@ -67,3 +67,5 @@ const renderMeals = () => {
         container.appendChild(row);
     });
 };
+
+export { addMeal, updateMeal, deleteMeal, renderMeals };

@@ -1,3 +1,5 @@
+import { loadData, saveData } from "./storage.js";
+
 const loadSettings = () => {
     const data = loadData();
 
@@ -19,3 +21,5 @@ const saveSettings = () => {
 
     saveData(data);
 };
+
+export { loadSettings, saveSettings };
