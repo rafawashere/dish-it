@@ -1,0 +1,17 @@
+{
+  "name": "dish-it",
+  "module": "index.html",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run index.html"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-plugin-tailwind": "^0.1.2",
+    "tailwindcss": "^4.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

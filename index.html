@@ -1,41 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DishIt!</title>
-
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-
-    <header>
-        <h1>🍽️ DishIt!</h1>
-        <p>Never wonder what's for dinner again.</p>
-    </header>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.ts" type="module"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dish It! Never wonder what's for dinner again.</title>
+  </head>
+  <body>
+  <nav class="relative mb-10 bg-neutral-800 dark:bg-neutral-800/50 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center">
+            <h1>🍽️ Dish It!</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
     <main>
-        <section id="meals-section">
-            <button id="addMealBtn">+ Add Meal</button>
-
-            <div id="mealList"></div>
-        </section>
-
-        <section id="settings-section">
-            <h2>Settings</h2>
-
-            <label>
-                No Repeat Days
-                <input id="noRepeatDays" type="number">
-            </label>
-
-            <button id="exportBtn">Export JSON</button>
-
-            <input id="importFile" type="file">
-        </section>
+      <section id="meals-section" class="mx-auto max-w-7xl px-4 mb-16 sm:px-6 lg:px-8">
+        <button id="addMealBtn" class="mb-8 dark:bg-neutral-800 px-4 py-2 rounded-lg">+ Add Meal</button>
+        <div id="mealList"></div>
+      </section>
+      <section id="settings-section" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2>Settings</h2>
+        <label>
+          No Repeat Days
+          <input id="noRepeatDays" type="number">
+        </label>
+        <button id="exportBtn">Export JSON</button>
+        <input id="importFile" type="file">
+      </section>
     </main>
-
-    <script type="module" src="./js/app.js"></script>
-
-</body>
+  </body>
 </html>
+
