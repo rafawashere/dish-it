@@ -1,6 +1,6 @@
 import { addMeal, deleteMeal, renderMeals } from "./meals.js";
 import { deleteMeals, loadSettings, saveSettings } from "./settings.js";
-import { exportData, importData, loadData } from "./storage.js";
+import { exportData, importData, loadData, saveData } from "./storage.js";
 
 const routes = ["create", "meals", "settings"] as const;
 type Route = typeof routes[number];
@@ -13,6 +13,49 @@ const getRoute = (): Route => {
 const navigateTo = (path: string) => {
     history.pushState(null, "", path);
     renderRoute();
+};
+
+const generateMealPlan = () => {
+    const data = loadData();
+    if (!data.meals.length) return;
+
+    const meals = data.settings.randomize
+        ? [...data.meals].sort(() => Math.random() - 0.5)
+        : [...data.meals];
+
+    const limit = data.settings.limitOption === "5"
+        ? 5
+        : (data.settings.limitOption === "7" ? 7 : Math.max(1, data.settings.customLimit));
+    const count = Math.min(meals.length, limit);
+    const noRepeatDays = Math.max(0, data.settings.noRepeatDays);
+    
+    // Use stored recentMeals (names) as starting point for historical tracking
+    const historicalRecentMealNames: string[] = [...(data.recentMeals || [])];
+    const mealPlan: string[] = [];
+    const currentPlanMealNames: string[] = [];
+
+    for (let index = 0; index < count; index += 1) {
+        const availableMeal =
+            meals.find((meal) => !historicalRecentMealNames.includes(meal.name) && !currentPlanMealNames.includes(meal.name)) 
+            ?? meals.find((meal) => !currentPlanMealNames.includes(meal.name)) // Fallback to avoid repeating in the SAME plan
+            ?? meals[index % meals.length]; // Absolute fallback
+
+        if (!availableMeal) break;
+
+        currentPlanMealNames.push(availableMeal.name);
+        historicalRecentMealNames.push(availableMeal.name);
+        mealPlan.push(availableMeal.name);
+
+        // Keep historical tracking within the noRepeatDays limit
+        while (historicalRecentMealNames.length > noRepeatDays) {
+            historicalRecentMealNames.shift();
+        }
+    }
+
+    data.mealPlan = mealPlan;
+    data.recentMeals = historicalRecentMealNames;
+    saveData(data);
+    renderMealPlan();
 };
 
 const renderMealPlan = () => {
@@ -31,37 +74,18 @@ const renderMealPlan = () => {
 
     emptyState.hidden = true;
 
-    const meals = data.settings.randomize
-        ? [...data.meals].sort(() => Math.random() - 0.5)
-        : [...data.meals];
-
-    const limit = data.settings.limitOption === "5"
-        ? 5
-        : (data.settings.limitOption === "7" ? 7 : Math.max(1, data.settings.customLimit));
-    const count = Math.min(meals.length, limit);
-    const noRepeatDays = Math.max(0, data.settings.noRepeatDays);
-    const recentMealIds: string[] = [];
+    if (!data.mealPlan || data.mealPlan.length === 0) {
+        return;
+    }
 
     const row = document.createElement("ol");
 
-    for (let index = 0; index < count; index += 1) {
-        const fallbackMeal = meals[index % meals.length];
-        if (!fallbackMeal) return;
-
-        const availableMeal =
-            meals.find((meal) => !recentMealIds.includes(meal.id)) ?? fallbackMeal;
-
-        recentMealIds.push(availableMeal.id);
-
-        if (recentMealIds.length > noRepeatDays) {
-            recentMealIds.shift();
-        }
-
+    data.mealPlan.forEach((name, index) => {
         const mealName = document.createElement("li");
-        mealName.textContent = (index + 1) + ". " +  availableMeal.name;
-
+        mealName.textContent = (index + 1) + ". " + name;
         row.append(mealName);
-    }
+    });
+
     container.appendChild(row);
 };
 
@@ -130,7 +154,7 @@ document.addEventListener(
             .getElementById("createMealPlanBtn")!
             .addEventListener(
                 "click",
-                renderMealPlan
+                generateMealPlan
             );
 
         document
@@ -189,6 +213,14 @@ document.addEventListener(
                     return importData(file, () => {
                         inputElement.value = "";
                         renderRoute();
+
+                        const statusElement = document.getElementById("importStatus");
+                        if (statusElement) {
+                            statusElement.classList.replace("opacity-0", "opacity-100");
+                            setTimeout(() => {
+                                statusElement.classList.replace("opacity-100", "opacity-0");
+                            }, 2000);
+                        }
                     });
                 }
 

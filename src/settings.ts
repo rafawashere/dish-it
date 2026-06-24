@@ -96,6 +96,8 @@ const deleteMeals = () => {
 
     const data = loadData();
     data.meals = [];
+    data.mealPlan = [];
+    data.recentMeals = [];
     saveData(data);
     return true;
 };

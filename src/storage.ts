@@ -13,7 +13,9 @@ interface IStorage {
         limitOption: "5" | "7" | "custom";
         customLimit: number;
     },
-    meals: Meal[]
+    meals: Meal[],
+    mealPlan?: string[],
+    recentMeals?: string[]
 }
 
 const DEFAULT_DATA: IStorage = {
@@ -24,7 +26,8 @@ const DEFAULT_DATA: IStorage = {
         limitOption: "7",
         customLimit: 10
     },
-    meals: []
+    meals: [],
+    recentMeals: []
 };
 
 const loadData = (): IStorage => {
@@ -75,7 +78,8 @@ const exportData = () => {
             ...data,
             meals: Array.isArray(data?.meals)
                 ? data.meals.map((meal) => meal.name)
-                : []
+                : [],
+            recentMeals: data.recentMeals || []
         };
 
         const blob = new Blob(
@@ -132,6 +136,9 @@ const importData = (file: File, onComplete?: () => void) => {
                             ...currentData.settings,
                             ...parsed.settings
                         };
+                    }
+                    if (Array.isArray(parsed.recentMeals)) {
+                        currentData.recentMeals = parsed.recentMeals;
                     }
                 }
 

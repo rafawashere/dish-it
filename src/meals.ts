@@ -23,7 +23,16 @@ const updateMeal = (id: string, newName: string) => {
 
     if (!meal) return;
 
+    const oldName = meal.name;
     meal.name = newName.trim();
+
+    // Update name in meal plan and repeat history if it exists
+    if (data.mealPlan) {
+        data.mealPlan = data.mealPlan.map(name => name === oldName ? meal.name : name);
+    }
+    if (data.recentMeals) {
+        data.recentMeals = data.recentMeals.map(name => name === oldName ? meal.name : name);
+    }
 
     saveData(data);
 
@@ -39,6 +48,18 @@ const deleteMeal = (id: string) => {
         data.meals.filter(
             (meal) => meal.id !== id
         );
+
+    // Reset meal plan and history if a meal that was part of them is deleted
+    if (data.mealPlan) {
+        data.mealPlan = data.mealPlan.filter(name => {
+            return data.meals.some(m => m.name === name);
+        });
+    }
+    if (data.recentMeals) {
+        data.recentMeals = data.recentMeals.filter(name => {
+            return data.meals.some(m => m.name === name);
+        });
+    }
 
     saveData(data);
 
