@@ -10,6 +10,8 @@ interface IStorage {
         mealsPerWeek: number;
         noRepeatDays: number;
         randomize: boolean;
+        limitOption: "5" | "7" | "custom";
+        customLimit: number;
     },
     meals: Meal[]
 }
@@ -18,7 +20,9 @@ const DEFAULT_DATA: IStorage = {
     settings: {
         mealsPerWeek: 7,
         noRepeatDays: 14,
-        randomize: true
+        randomize: true,
+        limitOption: "7",
+        customLimit: 10
     },
     meals: []
 };
@@ -28,14 +32,29 @@ const loadData = (): IStorage => {
     if (!lsData) return structuredClone(DEFAULT_DATA);
 
     const storedData = JSON.parse(lsData) as Partial<IStorage>;
+    
+    const settings = {
+        ...DEFAULT_DATA.settings,
+        ...storedData.settings
+    } as IStorage["settings"];
+
+    // Initialize limitOption and customLimit if loading legacy data
+    if (storedData.settings && !("limitOption" in storedData.settings)) {
+        const mpw = settings.mealsPerWeek;
+        if (mpw === 5) {
+            settings.limitOption = "5";
+        } else if (mpw === 7) {
+            settings.limitOption = "7";
+        } else {
+            settings.limitOption = "custom";
+            settings.customLimit = mpw;
+        }
+    }
 
     return {
         ...structuredClone(DEFAULT_DATA),
         ...storedData,
-        settings: {
-            ...DEFAULT_DATA.settings,
-            ...storedData.settings
-        }
+        settings
     };
 }
 

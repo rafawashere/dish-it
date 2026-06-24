@@ -35,14 +35,17 @@ const renderMealPlan = () => {
         ? [...data.meals].sort(() => Math.random() - 0.5)
         : [...data.meals];
 
-    const days = Math.max(1, data.settings.mealsPerWeek);
+    const limit = data.settings.limitOption === "5"
+        ? 5
+        : (data.settings.limitOption === "7" ? 7 : Math.max(1, data.settings.customLimit));
+    const count = Math.min(meals.length, limit);
     const noRepeatDays = Math.max(0, data.settings.noRepeatDays);
     const recentMealIds: string[] = [];
 
     const row = document.createElement("ol");
 
-    for (let day = 0; day < days; day += 1) {
-        const fallbackMeal = meals[day % meals.length];
+    for (let index = 0; index < count; index += 1) {
+        const fallbackMeal = meals[index % meals.length];
         if (!fallbackMeal) return;
 
         const availableMeal =
@@ -54,12 +57,10 @@ const renderMealPlan = () => {
             recentMealIds.shift();
         }
 
-       
         const mealName = document.createElement("li");
-        mealName.textContent = (day + 1) + ". " +  availableMeal.name;
+        mealName.textContent = (index + 1) + ". " +  availableMeal.name;
 
         row.append(mealName);
-        
     }
     container.appendChild(row);
 };
@@ -141,6 +142,21 @@ document.addEventListener(
                     renderRoute();
                 }
             );
+
+        document.querySelectorAll('input[name="limitOption"]').forEach((radio) => {
+            radio.addEventListener("change", () => {
+                saveSettings();
+                renderRoute();
+            });
+        });
+
+        const customLimit = document.getElementById("customLimit");
+        if (customLimit) {
+            customLimit.addEventListener("change", () => {
+                saveSettings();
+                renderRoute();
+            });
+        }
 
         document
             .getElementById("exportBtn")!
