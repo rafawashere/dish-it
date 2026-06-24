@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "bun run index.html"
+    "start": "bun run index.html",
+    "build": "bun build ./index.html --outdir ./build"
   },
   "devDependencies": {
     "@types/bun": "latest",
