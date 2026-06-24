@@ -13,7 +13,7 @@ const saveSettings = () => {
     const element = document.getElementById("noRepeatDays");
     if (element) {
         const value = (element as HTMLInputElement).value;
-        data.settings.noRepeatDays = Number(value);
+        data.settings.noRepeatDays = Math.max(0, Number(value));
     }
 
     saveData(data);

@@ -17,7 +17,7 @@ const updateMeal = (id: string, name: string) => {
     const data = loadData();
 
     const meal =
-        data.meals.find(( m: {[key: string]: string }) => m.id === id);
+        data.meals.find((m) => m.id === id);
 
     if (!meal) return;
 
@@ -33,7 +33,7 @@ const deleteMeal = (id: string) => {
 
     data.meals =
         data.meals.filter(
-            (meal: {[key: string]: string }) => meal.id !== id
+            (meal) => meal.id !== id
         );
 
     saveData(data);
@@ -48,24 +48,27 @@ const renderMeals = () => {
         document.getElementById("mealList");
 
     if (!container) return;
-    
+
     container.innerHTML = "";
 
-    data.meals.forEach((meal: {[key: string]: string }) => {
+    data.meals.forEach((meal) => {
         const row =
             document.createElement("div");
+        const name =
+            document.createElement("span");
+        const deleteButton =
+            document.createElement("button");
 
         row.className = "meal-card";
+        name.textContent = meal.name;
 
-        row.innerHTML = `
-            <span>${meal.name}</span>
-            <button
-                data-id="${meal.id}"
-                class="delete-btn">
-                🗑️
-            </button>
-        `;
+        deleteButton.dataset.id = meal.id;
+        deleteButton.className = "delete-btn";
+        deleteButton.title = "Delete meal";
+        deleteButton.ariaLabel = `Delete ${meal.name}`;
+        deleteButton.textContent = "Delete";
 
+        row.append(name, deleteButton);
         container.appendChild(row);
     });
 };
