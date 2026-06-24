@@ -39,6 +39,8 @@ const renderMealPlan = () => {
     const noRepeatDays = Math.max(0, data.settings.noRepeatDays);
     const recentMealIds: string[] = [];
 
+    const row = document.createElement("ol");
+
     for (let day = 0; day < days; day += 1) {
         const fallbackMeal = meals[day % meals.length];
         if (!fallbackMeal) return;
@@ -52,19 +54,14 @@ const renderMealPlan = () => {
             recentMealIds.shift();
         }
 
-        const row = document.createElement("div");
-        const dayLabel = document.createElement("span");
-        const mealName = document.createElement("strong");
+       
+        const mealName = document.createElement("li");
+        mealName.textContent = (day + 1) + ". " +  availableMeal.name;
 
-        row.className = "bg-white border border-neutral-200 rounded-lg shadow-sm flex items-center justify-between gap-4 mt-3 min-h-14 py-3.5 px-4";
-        dayLabel.className = "text-neutral-500 text-sm";
-        dayLabel.textContent = `Day ${day + 1}`;
-        mealName.className = "text-[1.05rem] font-bold";
-        mealName.textContent = availableMeal.name;
-
-        row.append(dayLabel, mealName);
-        container.appendChild(row);
+        row.append(mealName);
+        
     }
+    container.appendChild(row);
 };
 
 const renderRoute = () => {
@@ -112,18 +109,21 @@ document.addEventListener(
             );
         });
 
-        document
-            .getElementById("addMealBtn")!
-            .addEventListener(
-                "click",
-                () => {
-                    const name = prompt("Enter meal name:");
+        const addMealForm = document.getElementById("addMealForm") as HTMLFormElement | null;
+        if (addMealForm) {
+            addMealForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const inputElement = document.getElementById("newMealName") as HTMLInputElement | null;
+                if (inputElement) {
+                    const name = inputElement.value.trim();
                     if (name) {
                         addMeal(name);
+                        inputElement.value = "";
                         renderRoute();
                     }
                 }
-            );
+            });
+        }
 
         document
             .getElementById("createMealPlanBtn")!
