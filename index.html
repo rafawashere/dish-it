@@ -100,13 +100,8 @@
                 <p class="text-neutral-600 m-0">Set repeat spacing and move your saved data between devices.</p>
             </div>
             <div class="bg-white border border-neutral-200 rounded-lg shadow-sm grid gap-10 p-5 dark:bg-neutral-800 dark:border-neutral-700">
-                <label class="grid gap-2 max-w-xs">
-                    No Repeat Days
-                    <input id="noRepeatDays" type="number" min="0"
-                           class="border border-neutral-300 rounded-lg px-3 py-2.5 dark:border-neutral-700">
-                </label>
                 <div class="grid gap-3 max-w-xs">
-                    <span class="text-neutral-900 dark:text-neutral-50 font-medium">Meal Plan Limit</span>
+                    <span class="text-neutral-900 dark:text-neutral-50 font-medium">Days to Plan</span>
                     <div class="relative flex bg-neutral-100 dark:bg-neutral-950 rounded-lg p-1 w-full border border-neutral-200 dark:border-neutral-800">
                         <!-- Sliding Indicator -->
                         <div id="slidingIndicator" class="absolute top-1 bottom-1 left-1 rounded-md bg-white dark:bg-neutral-800 shadow-sm transition-all duration-200 ease-in-out" style="width: calc(33.333% - 2.67px); transform: translateX(0px);"></div>
@@ -132,21 +127,42 @@
                         </label>
                     </div>
                 </div>
-                <div class="flex flex-col gap-3">
-                    <p class="text-xl">Import Meals List</p>
-                    <hr class="border-neutral-300 dark:border-neutral-700">
-                    <div>
-                        <input id="importFile" type="file" accept="application/json,.json"
-                               class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                <label class="grid gap-2 max-w-xs">
+                    No Repeat Days
+                    <input id="noRepeatDays" type="number" min="0"
+                           class="border border-neutral-300 rounded-lg px-3 py-2.5 dark:border-neutral-700">
+                </label>
+            </div>
+            <div class="bg-white border border-neutral-200 rounded-lg shadow-sm grid gap-10 p-5 dark:bg-neutral-800 dark:border-neutral-700">
+                <div class="flex gap-8">
+                    <div class="flex flex-col gap-3 w-full">
+                        <p class="text-xl">Export Meals List</p>
+                        <hr class="border-neutral-300 dark:border-neutral-700">
+                        <div>
+                            <button id="exportBtn"
+                                    class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3 w-full">
+                        <p class="text-xl">Import Meals List</p>
+                        <hr class="border-neutral-300 dark:border-neutral-700">
+                        <div>
+                            <input id="importFile" type="file" accept="application/json,.json"
+                                   class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="bg-white border border-neutral-200 rounded-lg shadow-sm grid gap-10 p-5 dark:bg-neutral-800 dark:border-neutral-700">
                 <div class="flex flex-col gap-3">
-                    <p class="text-xl">Export Meals List</p>
-                    <hr class="border-neutral-300 dark:border-neutral-700">
+                    <p class="text-xl text-red-600 dark:text-red-400">No Meals Zone</p>
+                    <hr class="border-red-200 dark:border-red-900/50">
                     <div>
-                        <button id="exportBtn"
-                                class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
-                            Export
+                        <button id="deleteMealsBtn"
+                                class="inline-flex items-center justify-center bg-red-800 hover:bg-red-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0 transition-colors">
+                            Delete All Meals
                         </button>
                     </div>
                 </div>
