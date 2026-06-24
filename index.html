@@ -1,93 +1,129 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>">
-    <link rel="stylesheet" href="./src/styles.css" />
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>">
+    <link rel="stylesheet" href="./src/styles.css"/>
     <script src="./src/app.ts" type="module"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dish It! - Never wonder what's for dinner again.</title>
-  </head>
-  <body>
-    <header class="relative bg-neutral-800 text-white dark:bg-neutral-800/50 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10">
-      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+</head>
+<body class="min-h-screen m-0 bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50">
+<header class="relative bg-neutral-800 text-white dark:bg-neutral-800/50 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
-          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="flex shrink-0 items-center">
-              <h1>🍽️ Dish It!</h1>
+            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div class="flex shrink-0 items-center">
+                    <h1>🍽️ Dish It!</h1>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </header>
-    <main class="app-shell mx-auto w-full max-w-7xl">
-      <nav class="sidebar" aria-label="Primary">
-        <ul>
-          <li>
-            <a href="/create" data-nav="create">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-              </svg>
-              Create Meal Plan
-            </a>
-          </li>
-          <li>
-            <a href="/meals" data-nav="meals">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-              Manage Meals
-            </a>
-          </li>
-          <li>
-            <a href="/settings" data-nav="settings">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              </svg>
-              Settings
-            </a>
-          </li>
+    </div>
+</header>
+<main class="grid grid-cols-[minmax(13rem,17rem)_1fr] min-h-[calc(100vh-4rem)] max-[760px]:grid-cols-1 mx-auto w-full max-w-7xl">
+    <nav class="border-r border-neutral-200 py-8 px-6 max-[760px]:border-b max-[760px]:border-r-0 max-[760px]:p-4"
+         aria-label="Primary">
+        <ul class="grid gap-2 list-none m-0 p-0">
+            <li>
+                <a href="/create" data-nav="create"
+                   class="flex items-center rounded-lg text-neutral-700 gap-2.5 min-h-11 px-3 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>
+                    </svg>
+                    Create Meal Plan
+                </a>
+            </li>
+            <li>
+                <a href="/meals" data-nav="meals"
+                   class="flex items-center rounded-lg text-neutral-700 gap-2.5 min-h-11 px-3 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                    </svg>
+                    Manage Meals
+                </a>
+            </li>
+            <li>
+                <a href="/settings" data-nav="settings"
+                   class="flex items-center rounded-lg text-neutral-700 gap-2.5 min-h-11 px-3 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+                    Settings
+                </a>
+            </li>
         </ul>
-      </nav>
-      <section class="p-8 sm:px-6 lg:px-8">
-        <div class="view" data-view="create">
-          <div class="page-title">
-            <h2>Create Meal Plan</h2>
-            <p>Generate a meal plan from your saved meals using your repeat settings.</p>
-          </div>
-          <div class="actions">
-            <button id="createMealPlanBtn">Create Plan</button>
-            <a class="button" href="/meals" data-route>Add Meals</a>
-          </div>
-          <p id="mealPlanEmpty" class="empty-state" hidden>Add meals before creating a plan.</p>
-          <div id="mealPlan"></div>
-        </div>
-        <div class="view" data-view="meals">
-          <div class="page-title">
-            <h2>Manage Meals</h2>
-            <p>Add meals to the pool used by the planner.</p>
-          </div>
-          <button id="addMealBtn">Add Meal</button>
-          <div id="mealList"></div>
-        </div>
-        <div class="view" data-view="settings">
-          <div class="page-title">
-            <h2>Settings</h2>
-            <p>Set repeat spacing and move your saved data between devices.</p>
-          </div>
-          <div class="settings-panel">
-            <label>
-              No Repeat Days
-              <input id="noRepeatDays" type="number" min="0">
-            </label>
-            <div class="actions">
-              <button id="exportBtn">Export JSON</button>
-              <input id="importFile" type="file" accept="application/json,.json">
+    </nav>
+    <section class="p-8 sm:px-6 lg:px-8">
+        <div class="grid gap-6 max-w-[54rem]" data-view="create">
+            <div class="grid gap-1.5">
+                <h2 class="text-3xl font-bold leading-tight m-0">Create Meal Plan</h2>
+                <p class="text-neutral-600 m-0">Generate a meal plan from your saved meals using your repeat
+                    settings.</p>
             </div>
-          </div>
+            <div class="flex flex-wrap gap-3">
+                <button id="createMealPlanBtn"
+                        class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                    Create Plan
+                </button>
+                <a class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0"
+                   href="/meals" data-route>Add Meals</a>
+            </div>
+            <p id="mealPlanEmpty" class="border border-dashed border-neutral-400 rounded-lg text-neutral-600 p-4"
+               hidden>Add meals before creating a plan.</p>
+            <div id="mealPlan"></div>
         </div>
-      </section>
-    </main>
-  </body>
+        <div class="grid gap-6 max-w-[54rem]" data-view="meals">
+            <div class="grid gap-1.5">
+                <h2 class="text-3xl font-bold leading-tight m-0">Manage Meals</h2>
+                <p class="text-neutral-600 m-0">Add meals to the list used by the planner.</p>
+            </div>
+            <div>
+                <button id="addMealBtn"
+                        class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                    Add Meal
+                </button>
+            </div>
+            <div id="mealList"></div>
+        </div>
+        <div class="grid gap-6 max-w-[54rem]" data-view="settings">
+            <div class="grid gap-1.5">
+                <h2 class="text-3xl font-bold leading-tight m-0">Settings</h2>
+                <p class="text-neutral-600 m-0">Set repeat spacing and move your saved data between devices.</p>
+            </div>
+            <div class="bg-white border border-neutral-200 rounded-lg shadow-sm grid gap-10 p-5 dark:bg-neutral-800 dark:border-neutral-700">
+                <label class="grid gap-2 max-w-xs">
+                    No Repeat Days
+                    <input id="noRepeatDays" type="number" min="0"
+                           class="border border-neutral-300 rounded-lg px-3 py-2.5 dark:border-neutral-700">
+                </label>
+                <div class="flex flex-col gap-3">
+                    <p class="text-xl">Import Meals List</p>
+                    <hr class="border-neutral-300 dark:border-neutral-700">
+                    <div>
+                        <input id="importFile" type="file" accept="application/json,.json"
+                               class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <p class="text-xl">Export Meals List</p>
+                    <hr class="border-neutral-300 dark:border-neutral-700">
+                    <div>
+                        <button id="exportBtn"
+                                class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
 </html>
