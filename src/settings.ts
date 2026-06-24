@@ -89,4 +89,15 @@ const saveSettings = () => {
     saveData(data);
 };
 
-export { loadSettings, saveSettings };
+const deleteMeals = () => {
+    if (!confirm("Are you sure you want to delete all meals? This action cannot be undone.")) {
+        return false;
+    }
+
+    const data = loadData();
+    data.meals = [];
+    saveData(data);
+    return true;
+};
+
+export { loadSettings, saveSettings, deleteMeals };
