@@ -1,0 +1,43 @@
+{
+  "settings": {
+    "mealsPerWeek": 7,
+    "noRepeatDays": 14,
+    "randomize": true,
+    "limitOption": "7",
+    "customLimit": 10
+  },
+  "meals": [
+    "Spaghetti Bolognese",
+    "Chicken Alfredo",
+    "Beef Tacos",
+    "Chicken Fajitas",
+    "Meatloaf with Mashed Potatoes",
+    "Beef Stir-Fry",
+    "Grilled Lemon Herb Chicken",
+    "Baked Ziti",
+    "BBQ Pulled Pork Sandwiches",
+    "Chicken Parmesan",
+    "Beef and Broccoli",
+    "Shepherd's Pie",
+    "Shrimp Scampi",
+    "Teriyaki Chicken Bowls",
+    "Stuffed Bell Peppers",
+    "Chicken Fried Rice",
+    "Beef Enchiladas",
+    "Honey Garlic Salmon",
+    "Sausage and Peppers",
+    "Chicken Pot Pie",
+    "Pork Chops with Roasted Vegetables",
+    "Cheeseburger Casserole",
+    "Turkey Chili",
+    "Chicken Quesadillas",
+    "Lasagna",
+    "Garlic Butter Steak Bites",
+    "White Chicken Chili",
+    "Sloppy Joe's",
+    "Creamy Tuscan Chicken",
+    "Beef Stroganoff"
+  ],
+  "recentMeals": [],
+  "mealPlan": []
+}
