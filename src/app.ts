@@ -1,5 +1,5 @@
 import { addMeal, deleteMeal, renderMeals } from "./meals.js";
-import { loadSettings, saveSettings } from "./settings.js";
+import { deleteMeals, loadSettings, saveSettings } from "./settings.js";
 import { exportData, importData, loadData } from "./storage.js";
 
 const routes = ["create", "meals", "settings"] as const;
@@ -163,6 +163,17 @@ document.addEventListener(
             .addEventListener(
                 "click",
                 exportData
+            );
+
+        document
+            .getElementById("deleteMealsBtn")!
+            .addEventListener(
+                "click",
+                () => {
+                    if (deleteMeals()) {
+                        renderRoute();
+                    }
+                }
             );
 
         document
