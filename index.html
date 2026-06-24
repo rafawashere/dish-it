@@ -84,12 +84,14 @@
                 <h2 class="text-3xl font-bold leading-tight m-0">Manage Meals</h2>
                 <p class="text-neutral-600 m-0">Add meals to the list used by the planner.</p>
             </div>
-            <div>
-                <button id="addMealBtn"
+            <form id="addMealForm" class="flex gap-3 max-w-md">
+                <input id="newMealName" type="text" placeholder="Enter meal name" required
+                       class="flex-1 border border-neutral-300 rounded-lg px-3 py-2.5 bg-white dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                <button type="submit"
                         class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
                     Add Meal
                 </button>
-            </div>
+            </form>
             <div id="mealList"></div>
         </div>
         <div class="grid gap-6 max-w-[54rem]" data-view="settings">

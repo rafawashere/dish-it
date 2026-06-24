@@ -46,24 +46,36 @@ const saveData = (data: IStorage) =>
     );
 
 const exportData = () => {
-    const data = localStorage.getItem(STORAGE_KEY);
+    const dataStr = localStorage.getItem(STORAGE_KEY);
 
-    if (!data) return;
+    if (!dataStr) return;
 
-    const blob = new Blob(
-        [data],
-        { type: "application/json" }
-    );
+    try {
+        const data = JSON.parse(dataStr) as IStorage;
+        const exportObj = {
+            ...data,
+            meals: Array.isArray(data?.meals)
+                ? data.meals.map((meal) => meal.name)
+                : []
+        };
 
-    const url = URL.createObjectURL(blob);
+        const blob = new Blob(
+            [JSON.stringify(exportObj, null, 2)],
+            { type: "application/json" }
+        );
 
-    const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
 
-    link.href = url;
-    link.download = `${STORAGE_KEY}.json`;
-    link.click();
+        const link = document.createElement("a");
 
-    URL.revokeObjectURL(url);
+        link.href = url;
+        link.download = `${STORAGE_KEY}.json`;
+        link.click();
+
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error("Export failed:", error);
+    }
 };
 
 const importData = (file: File, onComplete?: () => void) => {
@@ -73,12 +85,44 @@ const importData = (file: File, onComplete?: () => void) => {
         if (!target) return;
 
         if (typeof target.result === "string") {
-            JSON.parse(target.result);
+            try {
+                const parsed = JSON.parse(target.result);
+                const currentData = loadData();
 
-            localStorage.setItem(
-                STORAGE_KEY,
-                target.result
-            );
+                if (Array.isArray(parsed)) {
+                    currentData.meals = parsed.map((item: any) => {
+                        const name = typeof item === "string" ? item : (item?.name || "");
+                        return {
+                            id: crypto.randomUUID(),
+                            name: name.trim()
+                        };
+                    }).filter((meal: any) => meal.name !== "");
+                } else if (parsed && typeof parsed === "object") {
+                    if (Array.isArray(parsed.meals)) {
+                        currentData.meals = parsed.meals.map((meal: any) => {
+                            const name = typeof meal === "string" ? meal : (meal?.name || "");
+                            const id = (typeof meal === "object" && meal?.id) ? meal.id : crypto.randomUUID();
+                            return {
+                                id,
+                                name: name.trim()
+                            };
+                        }).filter((meal: any) => meal.name !== "");
+                    }
+                    if (parsed.settings) {
+                        currentData.settings = {
+                            ...currentData.settings,
+                            ...parsed.settings
+                        };
+                    }
+                }
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(currentData)
+                );
+            } catch (error) {
+                console.error("Import failed:", error);
+            }
         }
 
         onComplete?.();
