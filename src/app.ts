@@ -56,8 +56,10 @@ const renderMealPlan = () => {
         const dayLabel = document.createElement("span");
         const mealName = document.createElement("strong");
 
-        row.className = "plan-card";
+        row.className = "bg-white border border-neutral-200 rounded-lg shadow-sm flex items-center justify-between gap-4 mt-3 min-h-14 py-3.5 px-4";
+        dayLabel.className = "text-neutral-500 text-sm";
         dayLabel.textContent = `Day ${day + 1}`;
+        mealName.className = "text-[1.05rem] font-bold";
         mealName.textContent = availableMeal.name;
 
         row.append(dayLabel, mealName);
@@ -74,7 +76,12 @@ const renderRoute = () => {
 
     document.querySelectorAll<HTMLAnchorElement>("[data-nav]").forEach((link) => {
         const isActive = link.dataset.nav === route;
-        link.classList.toggle("active-nav", isActive);
+        link.classList.toggle("bg-neutral-100", isActive);
+        link.classList.toggle("dark:bg-neutral-800", isActive);
+        link.classList.toggle("text-neutral-900", isActive);
+        link.classList.toggle("dark:text-neutral-100", isActive);
+        link.classList.toggle("text-neutral-700", !isActive);
+        link.classList.toggle("dark:text-neutral-300", !isActive);
         link.setAttribute("aria-current", isActive ? "page" : "false");
     });
 
