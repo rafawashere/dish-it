@@ -22,7 +22,7 @@
     </div>
 </header>
 <main class="grid grid-cols-[minmax(13rem,17rem)_1fr] min-h-[calc(100vh-4rem)] max-[760px]:grid-cols-1 mx-auto w-full max-w-7xl">
-    <nav class="border-r border-neutral-200 py-8 px-6 max-[760px]:border-b max-[760px]:border-r-0 max-[760px]:p-4"
+    <nav class="border-r border-neutral-200 py-8 px-6 max-[760px]:border-b max-[760px]:border-r-0 max-[760px]:p-4 dark:border-neutral-800"
          aria-label="Primary">
         <ul class="grid gap-2 list-none m-0 p-0">
             <li>
@@ -70,7 +70,7 @@
             <div class="flex flex-wrap gap-3">
                 <button id="createMealPlanBtn"
                         class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
-                    Create Plan
+                    Create New Plan
                 </button>
                 <a class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0"
                    href="/meals" data-route>Add Meals</a>
@@ -148,9 +148,10 @@
                     <div class="flex flex-col gap-3 w-full">
                         <p class="text-xl">Import Meals List</p>
                         <hr class="border-neutral-300 dark:border-neutral-700">
-                        <div>
+                        <div class="flex items-center gap-3">
                             <input id="importFile" type="file" accept="application/json,.json"
                                    class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white rounded-lg min-h-10 px-4 py-2.5 no-underline cursor-pointer border-0">
+                            <span id="importStatus" class="text-emerald-600 dark:text-emerald-400 font-medium transition-opacity duration-300 opacity-0 pointer-events-none">Saved!</span>
                         </div>
                     </div>
                 </div>
